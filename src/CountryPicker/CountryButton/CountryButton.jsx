@@ -1,12 +1,12 @@
 import { Button, Checkbox, Paper, FormControlLabel, FormGroup } from '@mui/material';
 import React, { useState } from 'react';
 
-const CountryButton = ({country, setCountries}) => {
-   const [isChecked, setIsChecked] = useState(country.checked);
+const CountryButton = ({country}) => {
+   const [isChecked, setIsChecked] = useState(country.checked);  
  
-    const handleSelect = () => {            //Make him rerender for godssake
-          setIsChecked(prevIsChecked => !prevIsChecked);
-          console.log(country.checked);
+    const handleSelect = () => {    
+      country.checked = !country.checked;
+      setIsChecked(prevIsChecked => !prevIsChecked);         
     };
   
         
