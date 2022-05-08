@@ -12,7 +12,7 @@ const CountryButton = ({country}) => {
         
     
   return (
-    <Paper elevation={3} style={{ margin: 2 }}> 
+    <Paper elevation={isChecked ? 24 : 3} style={{ margin: 2 }}> 
         <FormGroup onChange={handleSelect}>          
         <FormControlLabel control={<Checkbox checked={isChecked} />} label={country.name}></FormControlLabel>  
         </FormGroup>                 

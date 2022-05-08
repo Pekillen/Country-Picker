@@ -8,7 +8,7 @@ const CountryPicker = () => {
     const [loading, setLoading] = useState([true]);       
     const [searchQuery, setSearchQuery] = useState("");
     const [regions, setRegions] = useState([]);
-    const [subRegions, setSubRegions] = useState([]);
+    const [subRegions, setSubRegions] = useState([]);    
 
     const fetchCountries = async () => {
         fetch('https://restcountries.com/v2/all')
@@ -54,16 +54,32 @@ const CountryPicker = () => {
         }       
     }  
 
-    const selectAllRegions = () => {
+    const compareSelectedRegions = () => {
         if (regions.toString() !== continents.toString()) {
+            return true;
+         } else {
+             return false;            
+         }
+    }
+
+    const selectAllRegions = () => {
+        if (compareSelectedRegions) {
            setRegions(continents);
         } else {
             setRegions([]);            
         }
     }    
 
-    const selectAllSubRegions = () => {
+    const compareSelectedSubRegions = () => {
         if (subRegions.toString() !== subContinents.toString()) {
+            return true;
+         } else {
+             return false;            
+         }
+    }
+
+    const selectAllSubRegions = () => {
+        if (compareSelectedSubRegions) {
             setSubRegions(subContinents);
          } else {
              setSubRegions([]);            
@@ -102,76 +118,98 @@ const CountryPicker = () => {
             }        
       };       
       
-      const handleClearChecked = () => {             
-          countries.map((country) => {
-              country.checked = false;              
-            })                               
-      };
-
-      const handleCheckSelected = () => {        
-            countries.filter(subRegionFilter).filter(regionFilter).filter(searchFilter).map((country) => {
+      
+      const handleCheckSelected = () => {                 
+          countries.filter(subRegionFilter).filter(regionFilter).filter(searchFilter).map((country) => {
               country.checked = true;            
-            })             
+            })         
+            
+      };
+        
+      const handleClearSelected = () => {        
+            countries.filter(subRegionFilter).filter(regionFilter).filter(searchFilter).map((country) => {
+              country.checked = false;            
+            })                     
+      };
+        
+      const handleClearAll = () => {             
+            countries.map((country) => {
+              country.checked = false;              
+            })                          
       };
 
+        
     useEffect(() => {            
         fetchCountries();        
-      }, []);  
+      }, []);       
+           
     
     if (loading) {
         return (
             <Grid container spacing={0} direction="column" alignItems="center" justifyContent="top" style={{ minHeight: '100vh' }} >
-            <Paper elevation={12} style={{ padding: '20px', borderRadius: '15px', width: '50vw', display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <Paper elevation={12} style={{ padding: '20px', borderRadius: '15px', width: '60vw', display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <CircularProgress size="5em" />
             </Paper>
             </Grid>
         );
-    }  
-    
+    }    
+
  
   return (   
     <Grid container spacing={0} direction="column" alignItems="center" justifyContent="top" style={{ minHeight: '100vh' }} >   
-        <Paper elevation={12} style={{ padding: '20px', borderRadius: '15px' , width: '60vw'}} >  
+        <Paper elevation={12} style={{ padding: '20px', borderRadius: '15px' , width: ' 60vw'}} >  
         <Typography variant='h4' align="center" marginBottom={2} >Country Picker</Typography>           
-            <TextField fullWidth id="outlined-search" label="Search a country..." type="search" onChange={(e) => {setSearchQuery(e.target.value)}}/>       
-            <Grid container   justifyContent="center" alignItems="center" spacing={4} columns={4} paddingTop={2} marginBottom={4}>
-                <Grid item> 
-                    <FormControl sx={{minWidth: 120}}>
-                        <InputLabel id="region">Region</InputLabel>
-                            <Select fullWidth labelId="region" onChange={handleRegion} value="" input={<OutlinedInput multiple label="All Regions" />}>
-                                {continents.map((continent) => 
-                                <MenuItem key={continent} value={continent}>                     
-                                    <ListItemText primary={continent} />   
-                                    <Checkbox checked={regions.includes(continent)} />                 
+            <TextField fullWidth id="outlined-search" label="Search for a country..." type="search" onChange={(e) => {setSearchQuery(e.target.value)}}/>               
+
+            <Grid container   justifyContent="center" alignItems="center" spacing={2} paddingTop={2} marginBottom={4}>
+                <Grid container item justifyContent="space-evenly" alignItems="center" sm={12} md={6} spacing={1} >
+                    <Grid item> 
+                        <FormControl sx={{minWidth: 140}}>
+                            <InputLabel id="region">Region</InputLabel>
+                                <Select fullWidth labelId="region" onChange={handleRegion} value="" input={<OutlinedInput multiple label="All Regions" />}>
+                                    {continents.map((continent) => 
+                                    <MenuItem key={continent} value={continent}>                     
+                                        <ListItemText primary={continent} />   
+                                        <Checkbox checked={regions.includes(continent)} />                 
+                                    </MenuItem>               
+                                    )}                
+                                </Select>
+                        </FormControl>
+                    </Grid>
+                    <Grid item>
+                        <Button onClick={selectAllRegions} variant="contained" >Select all regions</Button>
+                    </Grid>
+                </Grid>
+                <Grid container item justifyContent="space-evenly" alignItems="center" sm={12} md={6} spacing={1}>
+                    <Grid item>
+                        <FormControl sx={{minWidth: 140}} >
+                            <InputLabel id="subregion">Subregion</InputLabel>
+                            <Select fullWidth labelId="subregion" size="large" onChange={handleSubRegion} value="" input={<OutlinedInput multiple label="All Subregions" />}>
+                                {subContinents.map((subContinent) => 
+                                <MenuItem key={subContinent} value={subContinent}>                     
+                                    <ListItemText primary={subContinent} />   
+                                    <Checkbox checked={subRegions.includes(subContinent)} />                 
                                 </MenuItem>               
                                 )}                
                             </Select>
-                    </FormControl>
-                </Grid>
-                <Grid item>
-                    <Button onClick={selectAllRegions} variant="contained" >Select all regions</Button>
-                </Grid>
-                <Grid item>
-                    <FormControl sx={{minWidth: 140}} >
-                        <InputLabel>Subregion</InputLabel>
-                        <Select fullWidth size="large" onChange={handleSubRegion} value="" input={<OutlinedInput multiple label="All Subregions" />}>
-                            {subContinents.map((subContinent) => 
-                            <MenuItem key={subContinent} value={subContinent}>                     
-                                <ListItemText primary={subContinent} />   
-                                <Checkbox checked={subRegions.includes(subContinent)} />                 
-                            </MenuItem>               
-                            )}                
-                        </Select>
-                    </FormControl>
-                </Grid> 
-                <Grid item>
-                    <Button onClick={selectAllSubRegions} variant="contained">Select all subregions</Button>
+                        </FormControl>
+                    </Grid> 
+                    <Grid item>
+                        <Button onClick={selectAllSubRegions} variant="contained" >Select all subregions</Button>
+                    </Grid>
                 </Grid>
             </Grid>
-
-            <Grid container justifyContent="center" columns={2} marginBottom={4}>
-                <Button onClick={handleCheckSelected} variant="contained" >Check all the selected countries</Button>
-                <Button onClick={handleClearChecked}  variant="contained" >Clear selected countries</Button>
+            
+            <Grid container marginBottom={4} spacing={4} >
+                <Grid container item xs justifyContent="center" >
+                    <Button onClick={handleCheckSelected} variant="contained" >Check all selected countries</Button>
+                </Grid>
+                <Grid container item xs justifyContent="center" >
+                    <Button onClick={handleClearSelected}  variant="contained" color="secondary" >Clear all selected countries</Button>
+                </Grid>
+                <Grid container item xs justifyContent="center" >
+                    <Button onClick={handleClearAll}  variant="contained" color="secondary" >Clear all checked countries</Button>
+                </Grid>
             </Grid>
                 
             <Grid container >
@@ -186,10 +224,9 @@ const CountryPicker = () => {
                     </Grid>
                 );          
             })}
-            </Grid>
-                              
+            </Grid>                              
         </Paper>  
-    </Grid>   
+    </Grid>      
   )
 }
 
