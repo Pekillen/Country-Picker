@@ -7,9 +7,9 @@ The task was created enitrely by Piotr Kwiatkowski.
 
 To build and run the app locally on your machine you need to:
 
--Get the code on your local device 
--Open the folder containing the code
--Run `npm install` and then `npm start` using terminal or command line
+- Get the code on your local device 
+- Open the folder containing the code
+- Run `npm install` and then `npm start` using terminal or command line
 
 This will allow you to run the app in development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
