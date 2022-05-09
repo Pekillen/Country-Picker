@@ -199,7 +199,7 @@ const CountryPicker = () => {
                         <Grid item>
                             <FormControl sx={{minWidth: 160}} >
                                 <InputLabel id="subregion">Subregion</InputLabel>
-                                <Select fullWidth labelId="subregion" size="large" onChange={handleSubRegion} value="" input={<OutlinedInput multiple label="All Subregions" />}>
+                                <Select fullWidth labelId="subregion" size="large" onChange={handleSubRegion} value="Select" input={<OutlinedInput multiple label="All Subregions" />}>
                                     {filteredSubContinents.map((subContinent) => 
                                     <MenuItem key={subContinent} value={subContinent}>                     
                                         <ListItemText primary={subContinent} />   

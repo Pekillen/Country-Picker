@@ -16,7 +16,7 @@ const ConfirmationList = ({countries, setShowConfirmation, setSearchQuery}) => {
       <Grid container>
         {countries.map((country) => {          
           if (country.checked) return (
-            <Grid item key={country.alpha3Code} xs={12} sm={12} md={6} lg={3} xl={2} >                
+            <Grid item key={country.alpha3Code} xs={12} sm={12} md={6} lg={3} >                
               <ListItemText>{country.name}</ListItemText>                                                        
             </Grid> 
             );

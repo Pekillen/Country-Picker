@@ -16,17 +16,17 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### Purpose
 
-The Project contains a React Application with components. The purpose of the project was to create an Application that would:
+The Project contains a React Application and its components. The purpose of the project was to create an Application that would:
 - Be easily reusable
 - Have intuitive UI
 - Have clean code 
 
-This application was created using Material UI to provide clean and easy-to-understand UI, but foremost to make the app responsive. Except for Material UI, no other library was used. Other libraries were avoided to make the components as independent and easy to implement, as possible. For the same reason all components are located in the "CountryPicker" folder - the idea was to be able to inject the component into any app.
+This application was created using Material UI to provide clean and easy-to-understand UI, but foremost to make the app responsive. Except for Material UI, no other library was used. Other libraries were avoided to make the components as independent and easy to implement, as possible. For the same reason all components are located in the "CountryPicker" folder - the idea was to highlight the reusability of the component.
 
 ### Logic 
 
 The app consumes API receiving a JSON object containing information about countries of the world. This data is then spread out across an array and set as an initial state for the useState() hook in React. Each object in the array receives a property "checked" to track whether it was checked by the user. 
-Users may interact with data thanks to UI and easily select countries of choice. Once countries are chosen, users are transferred (sic! The best practice would be to use Router in the application, but since the component is relatively small and barely any libraries are used in this app, after clicking the button simply another component is rerendered) to a confirmation page, where the user has chosen countries displayed and can confirm the choice or go back.
+Users may interact with data thanks to UI and easily select countries of choice. Once countries are chosen, users are transferred (sic! The best practice would be to use Router in the application and to separate the code into a bigger number of child components, but in this project these practices were omitted to keep the component robust and reusable, therefore, after clicking the button simply another component is rerendered) to a confirmation page, where the user has chosen countries displayed and can confirm the choice or go back.
 
 ### Process 
 
