@@ -11,19 +11,25 @@ const ConfirmationList = ({countries, setShowConfirmation}) => {
   );
 
   const PopulatedList = () => (
-    <Grid container>
-          {countries.map((country) => {          
-            if (country.checked) return (
-              <Grid item key={country.alpha3Code} xs={12} sm={12} md={6} lg={3} xl={2} >                
-                <ListItemText>{country.name}</ListItemText>                                                        
-              </Grid> 
-              );
-          })}
-        </Grid>
+    <Grid >
+      <Typography variant='h5' align="center" marginBottom={2} >{`You have chosen ${numberOfCountries} countries.`}</Typography>     
+      <Grid container>
+        {countries.map((country) => {          
+          if (country.checked) return (
+            <Grid item key={country.alpha3Code} xs={12} sm={12} md={6} lg={3} xl={2} >                
+              <ListItemText>{country.name}</ListItemText>                                                        
+            </Grid> 
+            );
+        })}
+      </Grid>
+    </Grid>
   );
   
   const areChecked = countries.map((country) => {return country.checked});
-  const isAnyTrue = !areChecked.every(checked => !checked); 
+
+  const isAnyTrue = !areChecked.every(checked => !checked);   
+
+  const numberOfCountries = areChecked.filter(Boolean).length;
 
   return (
     <Grid container spacing={0} direction="column" alignItems="center" justifyContent="top" style={{ minHeight: '100vh' }} >   
@@ -35,9 +41,9 @@ const ConfirmationList = ({countries, setShowConfirmation}) => {
               <Button fullWidth onClick={() => setShowConfirmation(false)} variant="contained" color="secondary" >Go back to country picker</Button>
             </Grid>
             <Grid container item xs justifyContent="center" >
-              <Button fullWidth onClick={() => alert(countries)} variant="contained" disabled={!isAnyTrue} >Confirm</Button>
+              <Button fullWidth onClick={() => alert(`Thank you, you chosen ${numberOfCountries} countries.`)} variant="contained" disabled={!isAnyTrue} >Confirm</Button>
             </Grid>                    
-        </Grid>
+        </Grid>     
 
       {!isAnyTrue ? <EmptyList /> : <PopulatedList/> }     
         
