@@ -1,7 +1,7 @@
 import { Button, Grid, Paper, Typography, ListItemText, Box } from '@mui/material'
 import React from 'react';
 
-const ConfirmationList = ({countries, setShowConfirmation}) => {
+const ConfirmationList = ({countries, setShowConfirmation, setSearchQuery}) => {
 
   const EmptyList = () => (
     <div>
@@ -38,10 +38,10 @@ const ConfirmationList = ({countries, setShowConfirmation}) => {
       
         <Grid container marginBottom={4} spacing={4} >
             <Grid container item xs justifyContent="center" >
-              <Button fullWidth onClick={() => setShowConfirmation(false)} variant="contained" color="secondary" >Go back to country picker</Button>
+              <Button fullWidth onClick={() => {setShowConfirmation(false); setSearchQuery("")}} variant="contained" color="secondary" >Go back to country picker</Button>
             </Grid>
             <Grid container item xs justifyContent="center" >
-              <Button fullWidth onClick={() => alert(`Thank you, you chosen ${numberOfCountries} countries.`)} variant="contained" disabled={!isAnyTrue} >Confirm</Button>
+              <Button fullWidth onClick={() => alert(`Thank You! You have chosen ${numberOfCountries} countries.`)} variant="contained" disabled={!isAnyTrue} >Confirm</Button>
             </Grid>                    
         </Grid>     
 

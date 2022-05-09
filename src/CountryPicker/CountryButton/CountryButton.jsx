@@ -10,9 +10,7 @@ const CountryButton = ({selectedCountry, setCountries}) => {
         countryToChange.checked = !countryToChange.checked;          
         return newCountries;  
       })          
-    };
-  
-        
+    };         
     
   return (
     <Paper elevation={selectedCountry.checked ? 24 : 3} style={{ margin: 2 }}> 

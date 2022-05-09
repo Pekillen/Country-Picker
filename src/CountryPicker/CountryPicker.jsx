@@ -176,10 +176,10 @@ const CountryPicker = () => {
             <Typography variant='h4' align="center" marginBottom={2} >Country Picker</Typography>           
                 <TextField fullWidth id="outlined-search" label="Search for a country..." type="search" onChange={(e) => {setSearchQuery(e.target.value)}}/>               
 
-                <Grid container   justifyContent="center" alignItems="center" spacing={2} paddingTop={3} paddingBottom={4}>
+                <Grid container justifyContent="center" alignItems="center" spacing={2} paddingTop={3} paddingBottom={4}>
                     <Grid container item justifyContent="space-evenly" alignItems="center" sm={12} md={6} spacing={1} >
                         <Grid item> 
-                            <FormControl sx={{minWidth: 140}}>
+                            <FormControl sx={{minWidth: 160}}>
                                 <InputLabel id="region">Region</InputLabel>
                                     <Select fullWidth labelId="region" onChange={handleRegion} value="" input={<OutlinedInput multiple label="All Regions" />}>
                                         {continents.map((continent) => 
@@ -197,7 +197,7 @@ const CountryPicker = () => {
                     </Grid>
                     <Grid container item justifyContent="space-evenly" alignItems="center" sm={12} md={6} spacing={1}>
                         <Grid item>
-                            <FormControl sx={{minWidth: 140}} >
+                            <FormControl sx={{minWidth: 160}} >
                                 <InputLabel id="subregion">Subregion</InputLabel>
                                 <Select fullWidth labelId="subregion" size="large" onChange={handleSubRegion} value="" input={<OutlinedInput multiple label="All Subregions" />}>
                                     {filteredSubContinents.map((subContinent) => 
@@ -248,7 +248,7 @@ const CountryPicker = () => {
         </Grid>               
   );
   return (             
-    <Confirmation countries={countries} setShowConfirmation={setShowConfirmation} />           
+    <Confirmation countries={countries} setShowConfirmation={setShowConfirmation} setSearchQuery={setSearchQuery} />           
   )
 }
 
