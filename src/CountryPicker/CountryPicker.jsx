@@ -2,10 +2,12 @@ import React from 'react';
 import { InputLabel, Select, MenuItem, Button, Grid, Typography, FormControl, ListItemText, Checkbox, Paper, CircularProgress, OutlinedInput, TextField } from '@mui/material';
 import { useState, useEffect } from 'react';
 import CountryButton from './CountryButton/CountryButton';    
+import LoadingPaper from './LoadingPaper/LoadingPaper';
+import Confirmation from './Confirmation/Confirmation';
 
 
 const CountryPicker = () => {    
-    
+
     const [countries, setCountries] = useState([]);
     const [loading, setLoading] = useState([true]);       
     const [searchQuery, setSearchQuery] = useState("");
@@ -13,6 +15,7 @@ const CountryPicker = () => {
     const [subRegions, setSubRegions] = useState([]);    
     const [regionButton, setRegionButton] = useState(true);
     const [subRegionButton, setSubRegionButton] = useState(true);
+    const [showConfirmation, setShowConfirmation] = useState(false);
     
 
     const fetchCountries = async () => {
@@ -60,23 +63,35 @@ const CountryPicker = () => {
     }   
 
     const selectAllRegions = () => {
-        if (regions.toString() == continents.toString()) {    //przemyśl tego ifa
-           setRegions(continents);
-           setRegionButton(false);
-        } else {
-           setRegions([]);    
-           setRegionButton(true);        
+        if (regions.toString() === "" ) {  
+            setRegions(continents);                                  
+        }  else {
+            setRegions([]);                      
         }
     }     
+    
+    const handleRegionButtonState = () => {
+        if (regions.toString() === "") {                
+            setRegionButton(true);        
+        } else {           
+            setRegionButton(false);
+        }
+    }
 
-    const selectAllSubRegions = () => {
-        if (subRegions.toString() !== subContinents.toString()) {
-            setSubRegions(subContinents);
-            setSubRegionButton(false);
-         } else {
-             setSubRegions([]);  
-             setSubRegionButton(true);          
+    const selectAllSubRegions = () => {     
+        if (subRegions.toString() === "") {   
+            setSubRegions(filteredSubContinents)
+        } else {
+            setSubRegions([]);        
             }        
+        }
+
+    const handleSubRegionButtonState = () => {  
+            if (subRegions.toString() === "") {                
+                setSubRegionButton(true);        
+            } else {           
+                setSubRegionButton(false);
+            }
         }
         
          const searchFilter = (value) => {        
@@ -105,13 +120,10 @@ const CountryPicker = () => {
          
         
       const initContinents = countries.map(country => country.region);
-      const continents = [...new Set(initContinents)];   
-      
-      const initSubContinents = countries.map(country => country.subregion);
-      const subContinents = [...new Set(initSubContinents)];  
+      const continents = [...new Set(initContinents)];           
 
       const filteredInitSubContinents = countries.filter(regionFilter).map(country => country.subregion); 
-      const filteredSubContinents = [...new Set(filteredInitSubContinents)];  //show only continents that belong to selected region
+      const filteredSubContinents = [...new Set(filteredInitSubContinents)]; 
 
       
       const handleCheckSelected = () => {                 
@@ -147,24 +159,18 @@ const CountryPicker = () => {
                   })            
             })                        
       };
-
         
-    useEffect(() => {            
-        fetchCountries();        
-      }, []);       
-           
-    
-    if (loading) {
-        return (
-            <Grid container spacing={0} direction="column" alignItems="center" justifyContent="top" style={{ minHeight: '100vh' }} >
-                <Paper elevation={12} style={{ padding: '20px', borderRadius: '15px', width: '60vw', display: "flex", justifyContent: "center" }}>
-                    <CircularProgress size="5em" />
-                </Paper>
-            </Grid>
-        );
-    }    
+        useEffect(() => {            
+            fetchCountries();        
+        }, []);   
+        
+        useEffect(() => {
+        handleRegionButtonState();   
+        handleSubRegionButtonState();    
+        },[selectAllRegions, selectAllSubRegions])             
 
-  return (      
+
+  if (!showConfirmation) return ( loading ? <LoadingPaper /> :
         <Grid container spacing={0} direction="column" alignItems="center" justifyContent="top" style={{ minHeight: '100vh' }} >   
             <Paper elevation={12} style={{ padding: '20px', borderRadius: '15px' , width: ' 60vw'}} >  
             <Typography variant='h4' align="center" marginBottom={2} >Country Picker</Typography>           
@@ -220,6 +226,10 @@ const CountryPicker = () => {
                         <Button onClick={handleClearAll}  variant="contained" color="secondary" >Clear all checked countries</Button>
                     </Grid>
                 </Grid>
+
+                <Grid container marginBottom={3} justifyContent="center" color="red">                    
+                    <Button fullWidth onClick={() => setShowConfirmation(true)} variant="contained" >Confirm your choice</Button>
+                </Grid>      
                     
                 <Grid container >
                 {countries
@@ -234,8 +244,11 @@ const CountryPicker = () => {
                     );          
                 })}
                 </Grid>                              
-            </Paper>  
-        </Grid>         
+            </Paper>              
+        </Grid>               
+  );
+  return (             
+    <Confirmation countries={countries} setShowConfirmation={setShowConfirmation} />           
   )
 }
 
