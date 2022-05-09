@@ -176,7 +176,7 @@ const CountryPicker = () => {
             <Typography variant='h4' align="center" marginBottom={2} >Country Picker</Typography>           
                 <TextField fullWidth id="outlined-search" label="Search for a country..." type="search" onChange={(e) => {setSearchQuery(e.target.value)}}/>               
 
-                <Grid container   justifyContent="center" alignItems="center" spacing={2} paddingTop={2} paddingBottom={4}>
+                <Grid container   justifyContent="center" alignItems="center" spacing={2} paddingTop={3} paddingBottom={4}>
                     <Grid container item justifyContent="space-evenly" alignItems="center" sm={12} md={6} spacing={1} >
                         <Grid item> 
                             <FormControl sx={{minWidth: 140}}>
@@ -217,10 +217,10 @@ const CountryPicker = () => {
 
                 <Grid container marginBottom={4} spacing={4} >
                     <Grid container item xs justifyContent="center" >
-                        <Button onClick={handleCheckSelected} variant="contained" >Check all selected countries</Button>
+                        <Button onClick={handleCheckSelected} variant="contained" >Check all filtered countries</Button>
                     </Grid>
                     <Grid container item xs justifyContent="center" >
-                        <Button onClick={handleClearSelected}  variant="contained" color="secondary" >Clear all selected countries</Button>
+                        <Button onClick={handleClearSelected}  variant="contained" color="secondary" >Uncheck all filtered countries</Button>
                     </Grid>
                     <Grid container item xs justifyContent="center" >
                         <Button onClick={handleClearAll}  variant="contained" color="secondary" >Clear all checked countries</Button>
@@ -228,7 +228,7 @@ const CountryPicker = () => {
                 </Grid>
 
                 <Grid container marginBottom={3} justifyContent="center" color="red">                    
-                    <Button fullWidth onClick={() => setShowConfirmation(true)} variant="contained" >Confirm your choice</Button>
+                    <Button fullWidth onClick={() => setShowConfirmation(true)} variant="contained" size="large" >Confirm your choice</Button>
                 </Grid>      
                     
                 <Grid container >
@@ -238,7 +238,7 @@ const CountryPicker = () => {
                 .filter(searchFilter)
                 .map((country) => {        
                     return( 
-                        <Grid item key={country.alpha3Code} xs={12} sm={12} md={6} lg={4}  >
+                        <Grid item key={country.alpha3Code} xs={12} sm={12} md={6} lg={4} xl={3} >
                             <CountryButton selectedCountry={country} setCountries={setCountries} />                                          
                         </Grid>
                     );          

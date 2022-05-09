@@ -1,70 +1,33 @@
-# Getting Started with Create React App
+# The Country-Picker App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was created as a coding assignment for Bouvet ASA. 
+The task was created enitrely by Piotr Kwiatkowski.
 
-## Available Scripts
+## Build locally
 
-In the project directory, you can run:
+To build and run the app locally on your machine you need to:
 
-### `npm start`
+-Get the code on your local device 
+-Open the folder containing the code
+-Run `npm install` and then `npm start` using terminal or command line
 
-Runs the app in the development mode.\
+This will allow you to run the app in development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Purpose
 
-### `npm test`
+The Project contains a React Application with components. The purpose of the project was to create an Application that would:
+- Be easily reusable
+- Have intuitive UI
+- Have clean code 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This application was created using Material UI to provide clean and easy-to-understand UI, but foremost to make the app responsive. Except for Material UI, no other library was used. Other libraries were avoided to make the components as independent and easy to implement, as possible. For the same reason all components are located in the "CountryPicker" folder - the idea was to be able to take this folder and to be able to inject this into any app that would require this.
 
-### `npm run build`
+### Logic 
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The app consumes API receiving a JSON object containing information about countries of the world. This data is then spread out across an array and set as an initial state for the useState() hook in React. Each object in the array receives a property "checked" to track whether it was checked by the user. 
+Users may interact with data thanks to UI and easily select countries of choice. Once countries are chosen, users are transferred (sic! Best practice would be to use Router in the application, but since the component is relatively small and barely any libraries are used in this app, after clicking the button simply another component is rerendered) to a confirmation page, where a user has chosen countries displayed and can confirm the choice or go back and reconsider the choice. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Process 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Before starting this app some basic principles for this app were determined; I decided that I want to use as few libraries as reasonable, so the components can work straight out of the box. Secondly, I decided that one library I am going to use going to be MUI, due to its flexibility and responsiveness. Then I created a simple skeleton for the app; fetching the data, and deciding to keep the entire JSON object as a single state parameter. This decision was made based on assumption that this way the code will stay readable and easy to understand. After that, I created basic JSX components to display the data. Nextly, filters were implemented to manipulate the data. After that I steadily increased the complexity of the application, adding new methods, and components, testing the app at each step, and re-styling the app, so that it stays easy to understand.

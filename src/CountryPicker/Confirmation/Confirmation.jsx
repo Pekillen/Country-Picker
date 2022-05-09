@@ -1,4 +1,4 @@
-import { Button, Grid, Paper, Typography, ListItemText } from '@mui/material'
+import { Button, Grid, Paper, Typography, ListItemText, Box } from '@mui/material'
 import React from 'react';
 
 const ConfirmationList = ({countries, setShowConfirmation}) => {
@@ -14,8 +14,8 @@ const ConfirmationList = ({countries, setShowConfirmation}) => {
     <Grid container>
           {countries.map((country) => {          
             if (country.checked) return (
-              <Grid item key={country.alpha3Code} xs={12} sm={12} md={6} lg={4} >
-                <ListItemText>{country.name}</ListItemText>                                          
+              <Grid item key={country.alpha3Code} xs={12} sm={12} md={6} lg={3} xl={2} >                
+                <ListItemText>{country.name}</ListItemText>                                                        
               </Grid> 
               );
           })}
@@ -35,7 +35,7 @@ const ConfirmationList = ({countries, setShowConfirmation}) => {
               <Button fullWidth onClick={() => setShowConfirmation(false)} variant="contained" color="secondary" >Go back to country picker</Button>
             </Grid>
             <Grid container item xs justifyContent="center" >
-              <Button fullWidth onClick={() => alert('You will be transfered to a different page')} variant="contained" disabled={!isAnyTrue} >Confirm</Button>
+              <Button fullWidth onClick={() => alert(countries)} variant="contained" disabled={!isAnyTrue} >Confirm</Button>
             </Grid>                    
         </Grid>
 
