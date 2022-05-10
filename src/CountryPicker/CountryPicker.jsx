@@ -179,14 +179,14 @@ const CountryPicker = () => {
                 <Grid container justifyContent="center" alignItems="center" spacing={2} paddingTop={3} paddingBottom={4}>
                     <Grid container item justifyContent="space-evenly" alignItems="center" sm={12} md={6} spacing={1} >
                         <Grid item> 
-                            <FormControl sx={{minWidth: 160}}>
+                            <FormControl sx={{width: 180}}>
                                 <InputLabel id="region">Region</InputLabel>
                                     <Select fullWidth labelId="region" onChange={handleRegion} value="" input={<OutlinedInput multiple label="All Regions" />}>
                                         {continents.map((continent) => 
-                                        <MenuItem key={continent} value={continent}>                     
-                                            <ListItemText primary={continent} />   
-                                            <Checkbox checked={regions.includes(continent)} />                 
-                                        </MenuItem>               
+                                            <MenuItem key={continent} value={continent}>                     
+                                                <ListItemText primary={continent} />   
+                                                <Checkbox checked={regions.includes(continent)} />                 
+                                            </MenuItem>               
                                         )}                
                                     </Select>
                             </FormControl>
@@ -197,14 +197,14 @@ const CountryPicker = () => {
                     </Grid>
                     <Grid container item justifyContent="space-evenly" alignItems="center" sm={12} md={6} spacing={1}>
                         <Grid item>
-                            <FormControl sx={{minWidth: 160}} >
+                            <FormControl sx={{width: 180}} >
                                 <InputLabel id="subregion">Subregion</InputLabel>
-                                <Select fullWidth labelId="subregion" size="large" onChange={handleSubRegion} value="Select" input={<OutlinedInput multiple label="All Subregions" />}>
+                                <Select fullWidth labelId="subregion" onChange={handleSubRegion} value="" input={<OutlinedInput multiple label="All Subregions" />}>
                                     {filteredSubContinents.map((subContinent) => 
-                                    <MenuItem key={subContinent} value={subContinent}>                     
-                                        <ListItemText primary={subContinent} />   
-                                        <Checkbox checked={subRegions.includes(subContinent)} />                 
-                                    </MenuItem>               
+                                        <MenuItem key={subContinent} value={subContinent}>                     
+                                            <ListItemText primary={subContinent} />   
+                                            <Checkbox checked={subRegions.includes(subContinent)} />                 
+                                        </MenuItem>               
                                     )}                
                                 </Select>
                             </FormControl>
